@@ -1,14 +1,12 @@
 package com.bridgelabz;
 
+import java.util.Scanner;
+
 public class EmpWageBuilder {
     //Constants
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
-    public static final int EMP_RATE_PER_HOUR = 20;
-    public static final int NO_OF_WORKING_DAYS = 20;
-    public static final int MAX_HRS_IN_MONTH = 100;
-    public static void EmWageBuilder1() {
-        //Variables
+    public static void EmpWageBuilder(String company, int EMP_RATE_PER_HOUR, int NO_OF_WORKING_DAYS, int MAX_HRS_IN_MONTH) {
         int totalEmpWage = 0;
         int totalWorkingDays = 0;
         int totalEmpHrs = 0;
@@ -39,8 +37,18 @@ public class EmpWageBuilder {
         }
         System.out.println("Total employee wage:" + totalEmpWage);
     }
+
     public static void main(String[] args) {
         System.out.println("This is Employee Wage Computation problem");
-        EmWageBuilder1();
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Company name: ");
+        String company = scan.next();
+        System.out.println("Enter Wage per hour: ");
+        int EMP_RATE_PER_HR = scan.nextInt();
+        System.out .println("Enter Maximum working days in month: ");
+        int NO_OF_WORKING_DAYS = scan.nextInt();
+        System.out.println("Enter maximum working hours in month: ");
+        int MAX_HRS_IN_MONTH = scan.nextInt();
+        EmpWageBuilder(company,EMP_RATE_PER_HR,NO_OF_WORKING_DAYS,MAX_HRS_IN_MONTH);
     }
 }
