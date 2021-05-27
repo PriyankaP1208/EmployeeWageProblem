@@ -1,6 +1,9 @@
 package com.bridgelabz;
+
+import java.util.ArrayList;
+
 interface EmployeeWage{
-    void computeEmpWage(CompanyEmpWage companyEmpWage);
+    public void computeEmpWage(CompanyEmpWage companyEmpWage);
 }
 
 public class EmpWageBuilder implements EmployeeWage {
@@ -33,24 +36,22 @@ public class EmpWageBuilder implements EmployeeWage {
         System.out.println("Total Employee working hrs:" + totalEmpHrs);
         System.out.println("Total Employee working days:" + totalWorkingDays);
         int totalEmpWage = totalEmpHrs * companyEmpWage.empRatePerHr;
-        System.out.println("Total employee wage for " + companyEmpWage.company + " is "+ totalEmpWage);
+        System.out.println("Total employee wage for " + companyEmpWage.company + " is " + totalEmpWage);
     }
 
     public static void main(String[] args) {
         System.out.println("This is Employee Wage Computation problem");
         EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-        CompanyEmpWage[] company = new CompanyEmpWage[3];
-        company[0] = new CompanyEmpWage("TCS",20,40,80);
-        empWageBuilder.computeEmpWage(company[0]);
-        company[1] = new CompanyEmpWage("Reliance",25,45,100);
-        empWageBuilder.computeEmpWage(company[1]);
-        company[2] = new CompanyEmpWage("Atos",30,35,90);
-        empWageBuilder.computeEmpWage(company[2]);
+        ArrayList<CompanyEmpWage> array = new ArrayList<>();
+        array.add(new CompanyEmpWage("TCS", 20, 40, 100));
+        empWageBuilder.computeEmpWage(array.get(0));
+        array.add(new CompanyEmpWage("Reliance", 25, 45, 100));
+        empWageBuilder.computeEmpWage(array.get(1));
     }
 }
 
 class CompanyEmpWage{
-    int empRatePerHr, wagePerHour, workingDays, workingHours;
+    int empRatePerHr, workingDays, workingHours;
     String company;
     public CompanyEmpWage(String company, int empRatePerHr, int workingDays, int workingHours)
     {
