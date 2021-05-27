@@ -32,11 +32,13 @@ public class EmpWageBuilder implements EmployeeWage {
                     empHrs = 0;
             }
             totalEmpHrs += empHrs;
+            companyEmpWage.empWage = empHrs * companyEmpWage.empRatePerHr;
+            System.out.println("Total Employee working hrs:" + totalEmpHrs);
         }
-        System.out.println("Total Employee working hrs:" + totalEmpHrs);
         System.out.println("Total Employee working days:" + totalWorkingDays);
         int totalEmpWage = totalEmpHrs * companyEmpWage.empRatePerHr;
-        System.out.println("Total employee wage for " + companyEmpWage.company + " is " + totalEmpWage);
+        companyEmpWage.empMonthlyWage = empHrs * companyEmpWage.empRatePerHr;
+        System.out.println("Total employee wage for " + companyEmpWage.company + " is " + companyEmpWage.empMonthlyWage);
     }
 
     public static void main(String[] args) {
@@ -51,7 +53,7 @@ public class EmpWageBuilder implements EmployeeWage {
 }
 
 class CompanyEmpWage{
-    int empRatePerHr, workingDays, workingHours;
+    int empRatePerHr, workingDays, workingHours, empWage, empMonthlyWage;
     String company;
     public CompanyEmpWage(String company, int empRatePerHr, int workingDays, int workingHours)
     {
