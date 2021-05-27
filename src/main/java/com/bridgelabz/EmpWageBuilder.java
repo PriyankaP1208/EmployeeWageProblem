@@ -1,30 +1,15 @@
 package com.bridgelabz;
 
-import java.util.Scanner;
-
 public class EmpWageBuilder {
     //Constants
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
-    //Variables
-    public int totalEmpWage;
-    private final String company;
-    private final int EMP_RATE_PER_HOUR;
-    private final int NO_OF_WORKING_DAYS;
-    private final int MAX_HRS_IN_MONTH;
-
-    public EmpWageBuilder(String company, int EMP_RATE_PER_HOUR, int NO_OF_WORKING_DAYS, int MAX_HRS_IN_MONTH) {
-        this.company = company;
-        this.EMP_RATE_PER_HOUR = EMP_RATE_PER_HOUR;
-        this.NO_OF_WORKING_DAYS = NO_OF_WORKING_DAYS;
-        this.MAX_HRS_IN_MONTH = MAX_HRS_IN_MONTH;
-    }
 
     //Calculating monthly wage of employee
-    public void employeeMonthlyWage() {
+    public void computeEmpWage(CompanyEmpWage companyEmpWage) {
         //Variables
         int totalWorkingDays = 0, totalEmpHrs = 0, empHrs = 0;
-        while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NO_OF_WORKING_DAYS) {
+        while (totalEmpHrs <= companyEmpWage.workingHours && totalWorkingDays < companyEmpWage.workingDays) {
             totalWorkingDays++;
             double empCheck = Math.floor(Math.random() * 10) % 3;
             switch ((int) empCheck) {
@@ -44,19 +29,30 @@ public class EmpWageBuilder {
         }
         System.out.println("Total Employee working hrs:" + totalEmpHrs);
         System.out.println("Total Employee working days:" + totalWorkingDays);
-        totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+        int totalEmpWage = totalEmpHrs * companyEmpWage.empRatePerHr;
+        System.out.println("Total employee wage for " + companyEmpWage.company + " is "+ totalEmpWage);
     }
-    public String toString(){
-        return "Total employee wage for "+company+" is :" + totalEmpWage;
-    }
-
     public static void main(String[] args) {
         System.out.println("This is Employee Wage Computation problem");
-        EmpWageBuilder tcs = new EmpWageBuilder("TCS",20,20,100);
-        EmpWageBuilder reliance = new EmpWageBuilder("Reliance",10,25,150);
-        tcs.employeeMonthlyWage();
-        System.out.println(tcs);
-        reliance.employeeMonthlyWage();
-        System.out.println(reliance);
+        EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+        CompanyEmpWage[] company = new CompanyEmpWage[3];
+        company[0] = new CompanyEmpWage("TCS",20,40,80);
+        empWageBuilder.computeEmpWage(company[0]);
+        company[1] = new CompanyEmpWage("Reliance",25,45,100);
+        empWageBuilder.computeEmpWage(company[1]);
+        company[2] = new CompanyEmpWage("Atos",30,35,90);
+        empWageBuilder.computeEmpWage(company[2]);
+    }
+}
+class CompanyEmpWage{
+    int empRatePerHr, wagePerHour, workingDays, workingHours;
+    String company;
+
+    public CompanyEmpWage(String company, int empRatePerHr, int workingDays, int workingHours)
+    {
+        this.company = company;
+        this.empRatePerHr = empRatePerHr;
+        this.workingDays = workingDays;
+        this.workingHours = workingHours;
     }
 }
